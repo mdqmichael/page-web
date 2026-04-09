@@ -2,209 +2,182 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Proposta Segurança - Michael da Horus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultoria Horus - Michael Oliveira</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --horus-orange: #FF6600;
-            --horus-orange-dark: #E65C00;
-            --horus-dark: #333333;
-            --horus-gray-light: #f9f9f9;
-            --white: #ffffff;
+        :root { 
+            --primary: #00814c; 
+            --dark: #0f0f0f; 
+            --white: #ffffff; 
+            --whatsapp: #25d366;
+            --blue-info: #007bff;
+            --gray-bg: #ecedf0;
+            --text-muted: #666;
         }
 
-        * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-
-        body { 
-            font-family: 'Segoe UI', Tahoma, sans-serif; 
-            background-color: #f0f0f0; 
-            margin: 0; 
-            padding: 20px 0; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            zoom: 0.7; 
-        }
-
-        .no-print { margin-bottom: 15px; }
-        button { 
-            background: #28a745; color: white; padding: 10px 20px; 
-            border: none; border-radius: 6px; cursor: pointer; font-weight: bold; 
-        }
-
-        .page-container {
-            width: 1200px;
-            background: transparent;
-        }
-
-        /* CABEÇALHO MAIS COMPACTO */
+        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #333; background: var(--gray-bg); margin: 0; scroll-behavior: smooth; padding-bottom: 100px; }
+        
         header { 
-            background: linear-gradient(135deg, var(--horus-orange), var(--horus-orange-dark)) !important; 
-            color: white !important; 
-            padding: 20px 40px; /* Reduzido de 40px para 20px */
-            border-radius: 15px;
-            margin-bottom: 15px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1557597774-9d2739f85a76?auto=format&fit=crop&q=80&w=1000') center/cover;
+            color: var(--white); padding: 70px 20px; text-align: center; border-bottom: 5px solid var(--primary);
         }
 
-        header h1 { 
-            font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
-            font-size: 65px; /* Reduzido de 95px */
-            margin: 0; 
-            font-weight: 100;
-            line-height: 1;
+        .container { max-width: 1100px; margin: -40px auto 40px; padding: 0 20px; }
+        
+        .card { background: var(--white); border-radius: 12px; padding: 35px; margin-bottom: 25px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        
+        h2 { color: var(--primary); display: flex; align-items: center; gap: 10px; margin-top: 0; }
+        h3 { color: var(--dark); border-bottom: 1px solid #ddd; padding-bottom: 8px; margin-top: 30px; text-transform: uppercase; font-size: 1rem; letter-spacing: 1px;}
+
+        .intro-box { background: #e7f3ef; border-left: 5px solid var(--primary); padding: 20px; border-radius: 4px; margin-bottom: 20px; }
+
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 15px; }
+        .quote-link { 
+            text-decoration: none; color: inherit; background: #f8f9fa; padding: 20px; border-radius: 8px; border: 2px solid #eee;
+            transition: 0.3s; display: flex; flex-direction: column; height: 100%;
         }
+        .quote-link:hover { border-color: var(--whatsapp); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(37,211,102,0.1); }
+        .quote-link strong { color: var(--primary); font-size: 1.05em; margin-bottom: 5px; }
+        
+        .spec-list { font-size: 0.82em; color: var(--text-muted); list-style: none; padding: 0; margin: 10px 0; flex-grow: 1; }
+        .spec-list li { margin-bottom: 3px; display: flex; align-items: center; gap: 8px; }
+        .spec-list i { color: var(--primary); font-size: 9px; }
 
-        header p { 
-            font-size: 0.9rem; /* Reduzido */
-            margin-top: 5px; 
-            opacity: 0.95; 
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
-            font-weight: bold;
+        .btn-text { background: var(--whatsapp); color: white; padding: 8px; border-radius: 4px; font-weight: bold; font-size: 0.8em; text-align: center; }
+
+        .float-btn {
+            position: fixed; width: 60px; height: 60px; border-radius: 50px;
+            text-align: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000; display: flex; align-items: center; justify-content: center;
+            text-decoration: none; transition: 0.3s;
         }
+        .whatsapp-float { bottom: 40px; right: 40px; background-color: var(--whatsapp); color: #FFF; animation: pulse 2s infinite; }
+        .catalog-float { bottom: 40px; left: 40px; background-color: var(--blue-info); color: #FFF; font-size: 24px; width: auto; padding: 0 20px; }
+        .catalog-float span { font-size: 14px; font-weight: bold; margin-left: 10px; }
 
-        .cards-grid { 
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
 
-        .card { 
-            background: var(--white) !important; 
-            border-radius: 15px; 
-            box-shadow: 0 8px 15px rgba(0,0,0,0.05); 
-            border: 1px solid #ddd; 
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            text-align: left;
-        }
-
-        .header-card { 
-            background: var(--horus-dark) !important; 
-            color: white !important; 
-            padding: 12px; 
-            text-align: center; font-weight: bold; font-size: 12px; text-transform: uppercase;
-        }
-
-        .card-content { padding: 25px; flex-grow: 1; }
-
-        .product-title { 
-            color: var(--horus-orange) !important; 
-            font-size: 20px; font-weight: 800; margin-bottom: 10px; line-height: 1.2;
-        }
-
-        .desc-box {
-            background: var(--horus-gray-light) !important;
-            border-left: 4px solid var(--horus-orange);
-            padding: 12px; border-radius: 8px; margin-bottom: 15px;
-        }
-
-        .desc-box p { font-size: 13px; color: #444 !important; line-height: 1.5; margin: 0; }
-
-        ul { padding: 0; margin: 0; list-style: none; }
-
-        li { 
-            margin-bottom: 8px; font-size: 13.5px; color: var(--horus-dark) !important;
-            line-height: 1.4; display: flex; align-items: flex-start;
-        }
-
-        li::before {
-            content: "✓"; color: var(--horus-orange) !important;
-            font-weight: bold; margin-right: 10px;
-        }
-
-        footer {
-            margin-top: 15px; text-align: center; font-size: 0.85rem; color: #666;
-        }
-
-        @media print { 
-            .no-print { display: none; } 
-            body { zoom: 1; background: white !important; padding: 0; }
-            .page-container { width: 100%; }
-            @page { size: portrait; margin: 10mm; }
-        }
+        .footer-expert { text-align: center; padding: 50px 20px; background: var(--dark); color: white; border-radius: 12px; margin-top: 40px; }
+        .contact-num { font-size: 2.2em; color: var(--whatsapp); font-weight: bold; display: block; margin: 10px 0; }
     </style>
 </head>
 <body>
 
-    <div class="no-print">
-        <button onclick="window.print()">GERAR PDF / CAPTURAR TELA</button>
-    </div>
+<header>
+    <div style="text-transform: uppercase; letter-spacing: 3px; font-weight: bold; color: var(--primary); margin-bottom: 10px;">Michael Oliveira | Horus</div>
+    <h1>Engenharia de Segurança e Redução de Custos</h1>
+    <p>Soluções Inteligentes com Infraestrutura Otimizada</p>
+</header>
 
-    <div class="page-container">
-        <header>
-            <h1>Segurança Eletrônica</h1>
-            <p>Fale com Michael na Horus de Palmas - TO { (63) 3233-9412 } </p>
-        </header>
+<div class="container">
 
-        <div class="cards-grid">
-            <div class="card">
-                <div class="header-card">Gestão de Imagens</div>
-                <div class="card-content">
-                    <div class="product-title">Gravador Digital 16 Canais</div>
-                    <div class="desc-box">
-                        <p>Central de processamento robusta para alta densidade de câmeras IP e analógicas.</p>
-                    </div>
-                    <ul>
-                        <li><b>Capacidade:</b> Gerenciamento de 16 câmeras Ultra HD.</li>
-                        <li><b>Acesso:</b> Visualização em tempo real via Intelbras Cloud.</li>
-                        <li><b>Inteligência:</b> Detecção e analíticos de vídeo integrados.</li>
-                    </ul>
-                </div>
-            </div>
+    <section class="card">
+        <h2><i class="fas fa-hand-holding-usd"></i> Como entregamos 24 câmeras com economia?</h2>
+        <div class="intro-box">
+            <strong>O Segredo da Consultoria Michael Oliveira:</strong> Através de <strong>Soluções Cabeadas Mistas</strong>, utilizamos o Cabo UTP Furukawa para otimizar caminhos físicos, reduzindo custos de cobre sem perder qualidade. Combinamos a robustez do sinal analógico com a precisão do sistema IP, entregando um projeto profissional com valor financeiro reduzido.
+        </div>
+    </section>
 
-            <div class="card">
-                <div class="header-card">Monitoramento Pontual</div>
-                <div class="card-content">
-                    <div class="product-title">Câmeras IP VIP 1230</div>
-                    <div class="desc-box">
-                        <p>Resolução Full HD com excelente custo-benefício para ambientes diversos.</p>
-                    </div>
-                    <ul>
-                        <li><b>Resolução:</b> Imagens 1080p nítidas para identificação.</li>
-                        <li><b>IR Inteligente:</b> Visão noturna automática de longo alcance.</li>
-                        <li><b>Durabilidade:</b> Proteção IP67 contra sol e chuva intensos.</li>
-                    </ul>
-                </div>
-            </div>
+    <section class="card">
+        <h2><i class="fas fa-tools"></i> Projeto Híbrido em Destaque</h2>
+        <div class="product-grid">
+            <a href="https://wa.me/556332339412?text=Cotação: DVR MHDX 1316" target="_blank" class="quote-link">
+                <strong>MHDX 1316 (16 Canais + 8 IP)</strong>
+                <ul class="spec-list">
+                    <li><i class="fas fa-check"></i> Inteligência de Vídeo e Detecção Facial</li>
+                    <li><i class="fas fa-check"></i> Suporte a 24 canais totais</li>
+                </ul>
+                <span class="btn-text">COTAR NO WHATSAPP</span>
+            </a>
+            <a href="https://wa.me/556332339412?text=Cotação: Câmera VHL 1220 D G8" target="_blank" class="quote-link">
+                <strong>VHL 1220 D G8 (Resolução 1080p)</strong>
+                <ul class="spec-list">
+                    <li><i class="fas fa-check"></i> Visão Noturna 20m e Menu OSD</li>
+                </ul>
+                <span class="btn-text">COTAR NO WHATSAPP</span>
+            </a>
+        </div>
+    </section>
 
-            <div class="card">
-                <div class="header-card">Monitoramento Estratégico</div>
-                <div class="card-content">
-                    <div class="product-title">Câmera VIPW 1300 SD</div>
-                    <div class="desc-box">
-                        <p>Speed Dome Wi-Fi para monitoramento dinâmico com movimentação PTZ.</p>
-                    </div>
-                    <ul>
-                        <li><b>Mobilidade:</b> Controle de rotação e zoom pelo smartphone.</li>
-                        <li><b>Flexibilidade:</b> Instalação via Wi-Fi ou cabo de rede.</li>
-                        <li><b>Segurança:</b> Backup local via cartão micro SD.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="header-card">Infraestrutura e Energia</div>
-                <div class="card-content">
-                    <div class="product-title">Switch Intelbras Fast PoE</div>
-                    <div class="desc-box">
-                        <p>Transmissão de dados e energia unificados para câmeras IP.</p>
-                    </div>
-                    <ul>
-                        <li><b>PoE Ativo:</b> Alimenta as câmeras pelo próprio cabo de rede.</li>
-                        <li><b>Estabilidade:</b> Fluxo de dados contínuo sem quedas de imagem.</li>
-                        <li><b>Proteção:</b> Resistência a surtos elétricos em todas as portas.</li>
-                    </ul>
-                </div>
-            </div>
+    <section id="catalogo" class="card" style="background: #f0f7f4;">
+        <h2><i class="fas fa-warehouse"></i> Variedade em Estoque - Horus</h2>
+        <p>Estes são os itens disponíveis para pronta entrega conforme as fotos do nosso estoque:</p>
+        
+        <h3>Gravadores Digitais (MHDX)</h3>
+        <div class="product-grid">
+            <a href="https://wa.me/556332339412?text=Cotação: MHDX 1304" target="_blank" class="quote-link">
+                <strong>MHDX 1304 (04 Canais)</strong>
+                <ul class="spec-list"><li><i class="fas fa-circle"></i> Série 1000 Inteligente - 1080p Lite</li></ul>
+                <span class="btn-text">SOLICITAR PREÇO</span>
+            </a>
+            <a href="https://wa.me/556332339412?text=Cotação: MHDX 1308" target="_blank" class="quote-link">
+                <strong>MHDX 1308 (08 Canais)</strong>
+                <ul class="spec-list"><li><i class="fas fa-circle"></i> Detecção de Pessoas e Veículos</li></ul>
+                <span class="btn-text">SOLICITAR PREÇO</span>
+            </a>
+            <a href="https://wa.me/556332339412?text=Cotação: MHDX 3116-C" target="_blank" class="quote-link">
+                <strong>MHDX 3116-C (Compacto)</strong>
+                <ul class="spec-list"><li><i class="fas fa-circle"></i> Série 3000 Profissional - Resolução Full HD</li></ul>
+                <span class="btn-text">SOLICITAR PREÇO</span>
+            </a>
+            <a href="https://wa.me/556332339412?text=Cotação: MHDX 5208" target="_blank" class="quote-link">
+                <strong>MHDX 5208 (Alta Performance)</strong>
+                <ul class="spec-list"><li><i class="fas fa-circle"></i> Série 5000 - Reconhecimento Facial</li></ul>
+                <span class="btn-text">SOLICITAR PREÇO</span>
+            </a>
         </div>
 
-        <footer>
-            <p><b>Horus Distribuidora</b> • Palmas • Tocantins</p>
-        </footer>
+        <h3>Câmeras Full Color e Especializadas</h3>
+        <div class="product-grid">
+            <a href="https://wa.me/556332339412?text=Cotação: VHD 1220 D Full Color G9" target="_blank" class="quote-link">
+                <strong>VHD 1220 D FULL COLOR G9</strong>
+                <ul class="spec-list"><li><i class="fas fa-circle"></i> Imagem colorida no escuro total (LED)</li></ul>
+                <span class="btn-text">SOLICITAR PREÇO</span>
+            </a>
+            <a href="https://wa.me/556332339412?text=Cotação: VHD 1530 B 5MP" target="_blank" class="quote-link">
+                <strong>VHD 1530 B 5MP (Bullet)</strong>
+                <ul class="spec-list"><li><i class="fas fa-circle"></i> Resolução 5MP - Ultra Definição</li></ul>
+                <span class="btn-text">SOLICITAR PREÇO</span>
+            </a>
+            <a href="https://wa.me/556332339412?text=Cotação: VHD 3530 VF G2" target="_blank" class="quote-link">
+                <strong>VHD 3530 VF G2 (Varifocal)</strong>
+                <ul class="spec-list"><li><i class="fas fa-circle"></i> Lente Varifocal 2.7 a 12mm</li></ul>
+                <span class="btn-text">SOLICITAR PREÇO</span>
+            </a>
+        </div>
+
+        <h3>Acessórios e Conectividade</h3>
+        <div class="product-grid">
+            <a href="https://wa.me/556332339412?text=Cotação: Balun VB 501 P G2" target="_blank" class="quote-link">
+                <strong>BALUN VB 501 P G2 (4K)</strong>
+                <ul class="spec-list"><li><i class="fas fa-circle"></i> Proteção contra surtos e ruídos</li></ul>
+                <span class="btn-text">SOLICITAR PREÇO</span>
+            </a>
+            <a href="https://wa.me/556332339412?text=Cotação: VBOX 3000" target="_blank" class="quote-link">
+                <strong>SUPORTE VBOX 3000</strong>
+                <ul class="spec-list"><li><i class="fas fa-circle"></i> Organização e proteção de conectores</li></ul>
+                <span class="btn-text">SOLICITAR PREÇO</span>
+            </a>
+        </div>
+    </section>
+
+    <div class="footer-expert">
+        <h2>Michael Oliveira - Horus</h2>
+        <p>Especialista em CFTV e Infraestrutura Otimizada</p>
+        <span class="contact-num">(63) 3233-9412</span>
     </div>
+
+</div>
+
+<a href="#catalogo" class="float-btn catalog-float">
+    <i class="fas fa-boxes"></i>
+    <span>ESTOQUE DISPONÍVEL</span>
+</a>
+
+<a href="https://wa.me/556332339412" class="float-btn whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
 
 </body>
 </html>
